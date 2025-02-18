@@ -43,6 +43,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Rule;
@@ -86,7 +87,7 @@ public class ParametrosBancariosMapTest {
 		Set<ParametroBancario<?>> nomes = parametrosBancariosMap.nomes();
 		
 		assertEquals(ParamBancTest.P1, nomes.iterator().next());
-		assertEquals(V1, parametrosBancariosMap.getValor(ParamBancTest.P1));
+		assertEquals(Optional.of(V1), Optional.ofNullable(parametrosBancariosMap.getValor(ParamBancTest.P1)));
 		assertFalse(parametrosBancariosMap.isVazio());
 		assertTrue(parametrosBancariosMap.isNaoVazio());
 	}
