@@ -6,9 +6,26 @@
 	<artifactId>jrimum-domkee</artifactId>
 	<packaging>jar</packaging>
 	<name>Projeto Domkee</name>
-	<version>0.2.4</version>
+	<version>0.2.4-SNAPSHOT</version>
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/domkee</url>
+
+	<distributionManagement>
+		<repository>
+			<id>s3.releases</id>
+			<url>s3://br.com.clueit.mvn.repo/release</url>
+		</repository>
+		<snapshotRepository>
+			<id>s3.snapshots</id>
+			<url>s3://br.com.clueit.mvn.repo/snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<scm>
+		<url>https://github.com/MarioHNogueira/jrimum-domkee</url>
+		<connection>scm:git:https://github.com/MarioHNogueira/jrimum-domkee.git</connection>
+		<developerConnection>scm:git:https://github.com/MarioHNogueira/jrimum-domkee.git</developerConnection>
+		<tag>v1.4</tag>
+	</scm>
 
 	<licenses>
 		<license>
@@ -28,10 +45,6 @@
 		<url>http://github.com/jrimum/domkee/issues</url>
 	</issueManagement>
 
-	<scm>
-		<url>http://github.com/jrimum/domkee</url>
-	</scm>
-	
 	<developers>
 		<developer>
 			<name>Gilmar P. S. L.</name>
@@ -48,9 +61,38 @@
 	</developers>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jrimum</groupId>
+			<artifactId>jrimum-vallia</artifactId>
+			<version>0.2.4</version>
+		</dependency>
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-jdk5</artifactId>
+			<version>14.0.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<extensions>
@@ -160,59 +202,21 @@
 		    	</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.1</version>
-			</plugin>	
+				<version>2.8.2</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.jrimum</groupId>
-			<artifactId>jrimum-vallia</artifactId>
-			<version>0.2.4</version>
-		</dependency>
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
- 			<groupId>com.google.guava</groupId>
-   	 		<artifactId>guava-jdk5</artifactId>
-    		<version>14.0.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
- 			<groupId>org.hamcrest</groupId>
-   	 		<artifactId>hamcrest-all</artifactId>
-    		<version>1.3</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-	
-	<repositories>
-		<repository>
-			<id>jrimum.org</id>
-			<url>http://jrimum.org/maven/content/groups/public/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>s3.releases</id>
-			<url>s3://br.com.equipo.maven.repo/release</url>
-		</repository>
-		<snapshotRepository>
-			<id>s3.snapshots</id>
-			<url>s3://br.com.equipo.maven.repo/snapshot</url>
-		</snapshotRepository>
-	</distributionManagement>
-	
 </project>
